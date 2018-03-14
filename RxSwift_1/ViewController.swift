@@ -16,6 +16,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         debugPrint("commit test log")
+        debugPrint("commit test log")
+        debugPrint("commit test log")
+        debugPrint("commit test log")
+        //ddd
+
     }
 
     override func didReceiveMemoryWarning() {
