@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yKt-Oz-umv">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RxSwift_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,6 +23,66 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="142" y="133"/>
+        </scene>
+        <!--Event View Controller-->
+        <scene sceneID="9OY-Y3-rf2">
+            <objects>
+                <viewController storyboardIdentifier="EventViewController" id="yKt-Oz-umv" customClass="EventViewController" customModule="RxSwift_1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dtb-kZ-SZQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNh-E2-WhS">
+                                <rect key="frame" x="15" y="70" width="345" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0E-q3-9ap">
+                                <rect key="frame" x="15" y="200" width="345" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ira-8z-Mr2">
+                                <rect key="frame" x="15" y="607" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vwo-8w-FAv">
+                                <rect key="frame" x="15" y="130" width="345" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Vwo-8w-FAv" firstAttribute="top" secondItem="cNh-E2-WhS" secondAttribute="bottom" constant="30" id="1Pc-sW-s8h"/>
+                            <constraint firstItem="Ira-8z-Mr2" firstAttribute="leading" secondItem="8Bf-qH-Wba" secondAttribute="leading" constant="15" id="3kP-AR-vAg"/>
+                            <constraint firstItem="8Bf-qH-Wba" firstAttribute="bottom" secondItem="Ira-8z-Mr2" secondAttribute="bottom" constant="30" id="7jR-BR-Us8"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ira-8z-Mr2" secondAttribute="trailing" constant="20" symbolic="YES" id="B4E-N1-fva"/>
+                            <constraint firstItem="Vwo-8w-FAv" firstAttribute="leading" secondItem="8Bf-qH-Wba" secondAttribute="leading" constant="15" id="PBl-xa-efG"/>
+                            <constraint firstItem="cNh-E2-WhS" firstAttribute="leading" secondItem="8Bf-qH-Wba" secondAttribute="leading" constant="15" id="V9x-L1-Sd0"/>
+                            <constraint firstItem="cNh-E2-WhS" firstAttribute="top" secondItem="8Bf-qH-Wba" secondAttribute="top" constant="50" id="apR-Lt-k5S"/>
+                            <constraint firstItem="8Bf-qH-Wba" firstAttribute="trailing" secondItem="Vwo-8w-FAv" secondAttribute="trailing" constant="15" id="bj0-rg-bCh"/>
+                            <constraint firstItem="8Bf-qH-Wba" firstAttribute="trailing" secondItem="P0E-q3-9ap" secondAttribute="trailing" constant="15" id="f7E-QB-rO0"/>
+                            <constraint firstItem="P0E-q3-9ap" firstAttribute="leading" secondItem="8Bf-qH-Wba" secondAttribute="leading" constant="15" id="fkx-5q-YVO"/>
+                            <constraint firstItem="P0E-q3-9ap" firstAttribute="top" secondItem="cNh-E2-WhS" secondAttribute="bottom" constant="100" id="i2D-Dx-zUC"/>
+                            <constraint firstItem="8Bf-qH-Wba" firstAttribute="trailing" secondItem="cNh-E2-WhS" secondAttribute="trailing" constant="15" id="nCD-Su-4c1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8Bf-qH-Wba"/>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="Ira-8z-Mr2" id="Ns1-Ne-hKQ"/>
+                        <outlet property="textField" destination="cNh-E2-WhS" id="KKC-DE-eFV"/>
+                        <outlet property="textField2" destination="Vwo-8w-FAv" id="Ugk-zV-Jfe"/>
+                        <outlet property="textLabel" destination="P0E-q3-9ap" id="JIA-aB-ae8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z0h-rV-f9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="133"/>
         </scene>
     </scenes>
 </document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06127E16205CFF1F00B97E0E /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E15205CFF1F00B97E0E /* EventViewController.swift */; };
 		0615433B2057FDAC00F68D30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0615433A2057FDAC00F68D30 /* AppDelegate.swift */; };
 		0615433D2057FDAC00F68D30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0615433C2057FDAC00F68D30 /* ViewController.swift */; };
 		061543402057FDAC00F68D30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0615433E2057FDAC00F68D30 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06127E15205CFF1F00B97E0E /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		061543372057FDAC00F68D30 /* RxSwift_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwift_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0615433A2057FDAC00F68D30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0615433C2057FDAC00F68D30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				0615433A2057FDAC00F68D30 /* AppDelegate.swift */,
 				0615433C2057FDAC00F68D30 /* ViewController.swift */,
+				06127E15205CFF1F00B97E0E /* EventViewController.swift */,
 				0615433E2057FDAC00F68D30 /* Main.storyboard */,
 				061543412057FDAC00F68D30 /* Assets.xcassets */,
 				061543432057FDAC00F68D30 /* LaunchScreen.storyboard */,
@@ -464,6 +467,7 @@
 			files = (
 				0615433D2057FDAC00F68D30 /* ViewController.swift in Sources */,
 				0615433B2057FDAC00F68D30 /* AppDelegate.swift in Sources */,
+				06127E16205CFF1F00B97E0E /* EventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
