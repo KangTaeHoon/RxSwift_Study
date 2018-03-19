@@ -11,34 +11,31 @@ import RxCocoa
 import RxSwift
 
 enum API {
-    case getCheerList
+    case getCheerList(game_type: String, game_num: String, seq: Int, nation_code: String, user_key: String)
     case getMatotoList
+    case testList(String, Int)
 }
 
 extension API {
-    
-    //https://sccomment.wisetoto.com:442/app/query/cheer_global.php?ext=json&game_type=%@&game_num=%@&seq=%ld&nation_code=%@&user_key=%@
-    //http://api.wisetoto.com/app/renew/get_matoto.php?user_key=%@&list_type=%@&game_category=%@&game_year=%@&game_round=%@&date=%@&os_type=i&app_version=%@
-    
+  
     var host: String{
         return "https://sccomment.wisetoto.com:442"
     }
     
     var path: String {
         switch self {
+        case .getCheerList(let game_type, let game_num, let seq, let nation_code, let user_key):
+            return "/app/query/cheer_global.php?ext=json&game_type=\(game_type)&game_num=\(game_num)&seq=\(seq)&nation_code=\(nation_code)&user_key=\(user_key)"
         case .getMatotoList:
-            return "/app/renew/get_matoto.php"
-        case .getCheerList:
-            return "/app/query/cheer_global.php"
+            return "/app/renew/get_matoto.php?ext=json"
+        case let .testList(user_key, seq):
+            return "/app/renew/testList.php?\(user_key)&\(seq)"
         }
     }
     
     var url: URL? {
         return URL(string: "\(self.host)\(self.path)")
     }
-    
-    //print(API.getCheerList.url ?? "")
-    //output https://sccomment.wisetoto.com:442/app/query/cheer_global.php
 }
 
 struct Position {
@@ -51,20 +48,55 @@ extension Position {
     }
 }
 
-protocol Times {
+protocol Times{
     func times(_ times: Int) -> Times
 }
 
 extension String: Times {
     func times(_ times: Int) -> Times {
         return Array(0..<times)
-            .map { _ in
-                return self
-            }.reduce(""){
-                $0 + $1
+            .map { _ in self }
+            .reduce(""){ $0 + $1 }
+    }
+}
+
+extension Int: Times {
+    func times(_ times: Int) -> Times {
+        return self * times
+    }
+}
+    
+extension Times {
+    func printSomeThing() {
+        print("self value is: \(self)")
+    }
+}
+
+protocol somethingProtocol {
+    associatedtype ElementType
+    func isSomething(value: ElementType)
+}
+
+indirect enum BinaryTree{
+    case leaf
+    case node(left: BinaryTree, right: BinaryTree, data: Int)
+}
+
+
+extension BinaryTree {
+    func hasData(_ data: Int) -> Bool {
+        switch self {
+        case .leaf:
+            return false
+        case let .node(_,_,nodeData) where data == nodeData :
+            return true
+        case let .node(left,_,nodeData) where data < nodeData :
+            return left.hasData(data)
+        case let .node(_,right,nodeData) where data > nodeData :
+            return right.hasData(data)
+        case .node:
+            return false
         }
-        
-        //.reduce("", +)
     }
 }
 
@@ -86,7 +118,77 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        let closure = { (str: String) -> String in
+            return "Helloㄹㅈㄹㅉㄹ \(str)"
+        }
         
+        func performClosure(_ c: (String) -> String){
+            let result = c("Swift")
+            print(result)
+        }
+        
+        performClosure(closure)
+        
+        //inline closure
+        performClosure { (str: String) -> String in
+            return "Hello \(str)"
+        }
+        
+        //파라미터 자료형, 리턴형 생략
+        performClosure({ str in
+            return "Hello \(str)"
+        })
+        
+        //리턴 키워드 생략
+        
+        //파라미터의 수를 생략할수 있으면 $0로 대체
+        performClosure({ "Hello \($0)" })
+        performClosure() { "Hello \($0)" }
+        performClosure{ "Hello \($0)" }
+
+        
+
+        let double: (Int) -> Int = { value in
+            return value * 2
+        }
+        print(double(3))
+        
+        let multiply: (Int, Int) -> Int = { value1, value2 in
+            return value1 * value2
+        }
+        print(multiply(2, 3))
+        
+        let addition: (Int, Int) -> Int = { value1, value2 in
+            return value1 + value2
+        }
+        print(addition(2, 3))
+        
+        func printResultByMutableOperator(value1: Int,
+                                          value2: Int,
+                                          operator mutableOperator: (Int, Int) -> Int) {
+            print("result: \(mutableOperator(value1, value2))")
+        }
+        
+        printResultByMutableOperator(value1: 3, value2: 5, operator: addition)
+        printResultByMutableOperator(value1: 3, value2: 5) { ($0 + $1) * $1 / $0 }
+        
+        3.printSomeThing()
+        "my".printSomeThing()
+        
+        
+        let tree: BinaryTree = .node(
+            left: .node(left:  .node(left: .leaf, right: .leaf, data: 1),
+                        right: .node(left: .leaf, right: .leaf, data: 3), data: 2),
+        
+            right: .node(left: .node(left: .leaf, right: .leaf, data: 5),
+                         right: .node(left: .leaf, right: .leaf, data: 7), data: 6),
+            data: 4)
+        
+        print(tree.hasData(30))
+        
+        print(API.getCheerList(game_type: "soccer", game_num: "20", seq: 200, nation_code: "kr", user_key: "K1234").url ?? "")
+        print(API.testList("F1234", 1234).url ?? "")
         
         let array = [0,1,2,3,4,5,6,7]
         
@@ -112,8 +214,11 @@ class ViewController: UIViewController {
             item % 2 == 0
         }
         
-        print(filterArray)
+        let filterArray2 = array.filter { $0 % 2 == 0 }
         
+        print(filterArray)
+        print(filterArray2)
+
         //nil을 걸러낸다.
         let stringArray = ["good",
                            "http://google.com" ,
@@ -123,7 +228,11 @@ class ViewController: UIViewController {
             return URL(string: string)?.host
         }
         
+        let hosts2 = stringArray.flatMap { URL(string: $0)?.host }
+        
         print(hosts)
+        print(hosts2)
+
         
         //[0-9] (다쪼갬), [0-9]+ (연속된숫자)
         let rexArray = matches(for: "[0-9]", in: "ab2v9bc13j5jf4jv21")
@@ -131,11 +240,12 @@ class ViewController: UIViewController {
         
         collectionExample()
         
-        //        collectionExample()
         
         
-        //        print("3".times(3))
+        print("3".times(3))
         
+        let ar = Array(0..<3)
+        print(ar)
         //        let position = Position(x: 10, y: 10)
         //        let newPosition = position.transform(withOther: Position(x: 30, y: 30))
         //        print(newPosition)
@@ -160,6 +270,7 @@ extension ViewController{
         publishSubject.on(Event.next(1))
         publishSubject.on(Event.next(2))
         publishSubject.on(Event.next(3))
+        publishSubject.onNext(20)
         publishSubject.on(Event.completed)
         
         //completed가 일어난 다음의 이벤트는 동작하지 않는다.
@@ -249,20 +360,16 @@ extension ViewController{
         let numberArray = (try? NSRegularExpression(pattern: "[0-9]+")
             .matches(in: string, range: NSRange(string.startIndex..., in: string))
             
-            //참조: https://stackoverflow.com/questions/27880650/swift-extract-regex-matches
             //2. nil처리
             .flatMap { Range($0.range, in: string) }
-            
             .map { String(string[$0]) }) ?? []
         
         let r = numberArray
-            
             .flatMap{ (number: String) -> Int? in
                 return Int(number)
             }
-            .filter { (value: Int) -> Bool in
-                return value % 2 != 0
-            }.map { $0 * $0 }
+            .filter { $0 % 2 != 0 }
+            .map { $0 * $0 }
             .reduce(0, +)
         
         print(r)
@@ -282,4 +389,10 @@ extension ViewController{
             return []
         }
     }
+    
+    //Type Constraints
+    func compare<T: Equatable>(value1: T, value2: T) -> Bool{
+        return value1 == value2
+    }
 }
+
