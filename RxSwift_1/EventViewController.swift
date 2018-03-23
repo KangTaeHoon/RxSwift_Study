@@ -31,9 +31,10 @@ class EventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        gugudan()
         
+        //        gugudan()
+        bind2()
+        //        bind()
     }
 }
 
@@ -59,15 +60,24 @@ extension EventViewController{
         let firstNumberObservable = textField.rx.text.orEmpty.map { Int($0) ?? 0}
         let secondNumberObservable = textField2.rx.text.orEmpty.map { Int($0) ?? 0}
         
-        Observable
-            .merge( [firstNumberObservable, secondNumberObservable])
-            .subscribe( onNext: { [weak self] result in
-                self?.textLabel.text = "\(result)"
-            }).disposed(by: disposeBag)
+        //Merge: 이벤트 타입이 같은 옵저버블 여러개를 합친다.
+        //        Observable
+        //            .merge( [firstNumberObservable, secondNumberObservable])
+        //            .subscribe( onNext: { [weak self] result in
+        //                self?.textLabel.text = "\(result)"
+        //            }).disposed(by: disposeBag)
         
-        Observable<Int>
-            .combineLatest(firstNumberObservable, secondNumberObservable) { (first, second) -> Int in
-                return first+second
+        //Zip : 여러옵저버블에서 이벤트를 한쌍씩 순서대로 합친다.
+        //        Observable
+        //            .zip( [firstNumberObservable, secondNumberObservable])
+        //            .subscribe( onNext: { [weak self] result in
+        //                self?.textLabel.text = "\(result)"
+        //            }).disposed(by: disposeBag)
+        
+        //CombineLatest : 여러 옵저버블에서 가장 최근 이벤트들을 합친다.
+        Observable<String>
+            .combineLatest(firstNumberObservable, secondNumberObservable) { (first, second) -> String in
+                return "\(first)\(second)"
             }.subscribe(onNext:{ [weak self] result in
                 self?.textLabel.text = "\(result)"
             }).disposed(by: disposeBag)
@@ -75,20 +85,21 @@ extension EventViewController{
     
     func bind(){
         
+        //asObservable() 제거해도 동일
         textField.rx.text.asObservable().map{ text -> String in
             let string = text ?? ""
             return "\(string)\(string)"
             }
             .subscribe { [weak self] (event) in
-            if case .next(let element) = event{
-                self?.textLabel.text = element
-            }
-        }.disposed(by: disposeBag)
-
+                //            if case .next(let element) = event.element{
+                self?.textLabel.text = event.element
+                //            }
+            }.disposed(by: disposeBag)
         
-        button.rx.tap.asObservable()
-            .flatMap { _ -> Observable<String> in
-                return Observable<String>.just("강태훈")
+        
+        button.rx.tap.asObservable().flatMap { _ -> Observable<String> in
+            return Observable<String>.just("강태훈")
+            
             }.subscribe { [weak self] (event) in
                 if case .next(let element) = event{
                     self?.textLabel.text = element
@@ -96,3 +107,4 @@ extension EventViewController{
             }.disposed(by: disposeBag)
     }
 }
+

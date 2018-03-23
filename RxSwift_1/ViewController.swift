@@ -10,24 +10,25 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+//MARK: - Enumerate Pattern + Extension
 enum API {
     case getCheerList(game_type: String, game_num: String, seq: Int, nation_code: String, user_key: String)
-    case getMatotoList
+    case getMatotoList(user: String)
     case testList(String, Int)
 }
 
 extension API {
-  
+    
     var host: String{
         return "https://sccomment.wisetoto.com:442"
     }
     
     var path: String {
         switch self {
-        case .getCheerList(let game_type, let game_num, let seq, let nation_code, let user_key):
+        case let .getCheerList(game_type, game_num, seq, nation_code, user_key):
             return "/app/query/cheer_global.php?ext=json&game_type=\(game_type)&game_num=\(game_num)&seq=\(seq)&nation_code=\(nation_code)&user_key=\(user_key)"
-        case .getMatotoList:
-            return "/app/renew/get_matoto.php?ext=json"
+        case let .getMatotoList(user):
+            return "/app/renew/get_matoto.php?ext=json&=user=\(user)"
         case let .testList(user_key, seq):
             return "/app/renew/testList.php?\(user_key)&\(seq)"
         }
@@ -38,6 +39,7 @@ extension API {
     }
 }
 
+//MARK: - Struct Extension
 struct Position {
     var x: Float
     var y: Float
@@ -48,6 +50,7 @@ extension Position {
     }
 }
 
+//MARK: - Protocol Extension
 protocol Times{
     func times(_ times: Int) -> Times
 }
@@ -65,23 +68,24 @@ extension Int: Times {
         return self * times
     }
 }
-    
+
 extension Times {
     func printSomeThing() {
         print("self value is: \(self)")
     }
 }
 
+//MARK: - Protocol Generic + associatedtype
 protocol somethingProtocol {
-    associatedtype ElementType
-    func isSomething(value: ElementType)
+    associatedtype T
+    func isSomething(value: T)
 }
 
+//MARK: - indirect
 indirect enum BinaryTree{
     case leaf
     case node(left: BinaryTree, right: BinaryTree, data: Int)
 }
-
 
 extension BinaryTree {
     func hasData(_ data: Int) -> Bool {
@@ -104,6 +108,7 @@ class ViewController: UIViewController {
     
     var disposeBag = DisposeBag()
     
+    //Subscribe
     let subscribe: (Event<Int>) -> Void = { (event: Event) in
         switch event {
         case let .next(element):
@@ -118,11 +123,38 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
+        print(3.times(3))
+        print("3".times(3))
+        3.printSomeThing()
+        "my".printSomeThing()
+        
+        print(API.getCheerList(game_type: "soccer", game_num: "20", seq: 200, nation_code: "kr", user_key: "K1234").url ?? "")
+        print(API.testList("F1234", 1234).url ?? "")
+        
+        let tree: BinaryTree = .node(
+            left: .node(left:  .node(left: .leaf, right: .leaf, data: 1),
+                        right: .node(left: .leaf, right: .leaf, data: 3), data: 2),
+            
+            right: .node(left: .node(left: .leaf, right: .leaf, data: 5),
+                         right: .node(left: .leaf, right: .leaf, data: 7), data: 6),
+            data: 4)
+        
+        print(tree.hasData(30))
+        
+        //기본 클로저 형태
+        // { (파라미터 명 : 타입) -> 리턴타입 in
+        //    return ""
+        // }
+        
+        // 클로저를 변수에 담음
         let closure = { (str: String) -> String in
-            return "Helloㄹㅈㄹㅉㄹ \(str)"
+            return "Hello \(str)"
         }
         
+        print(closure("a"))
+        
+        //함수의 파라미터로 클로저를 받음
         func performClosure(_ c: (String) -> String){
             let result = c("Swift")
             print(result)
@@ -130,7 +162,7 @@ class ViewController: UIViewController {
         
         performClosure(closure)
         
-        //inline closure
+        //인라인 클로저
         performClosure { (str: String) -> String in
             return "Hello \(str)"
         }
@@ -146,12 +178,12 @@ class ViewController: UIViewController {
         performClosure({ "Hello \($0)" })
         performClosure() { "Hello \($0)" }
         performClosure{ "Hello \($0)" }
-
         
-
+        
         let double: (Int) -> Int = { value in
             return value * 2
         }
+        
         print(double(3))
         
         let multiply: (Int, Int) -> Int = { value1, value2 in
@@ -173,53 +205,27 @@ class ViewController: UIViewController {
         printResultByMutableOperator(value1: 3, value2: 5, operator: addition)
         printResultByMutableOperator(value1: 3, value2: 5) { ($0 + $1) * $1 / $0 }
         
-        3.printSomeThing()
-        "my".printSomeThing()
-        
-        
-        let tree: BinaryTree = .node(
-            left: .node(left:  .node(left: .leaf, right: .leaf, data: 1),
-                        right: .node(left: .leaf, right: .leaf, data: 3), data: 2),
-        
-            right: .node(left: .node(left: .leaf, right: .leaf, data: 5),
-                         right: .node(left: .leaf, right: .leaf, data: 7), data: 6),
-            data: 4)
-        
-        print(tree.hasData(30))
-        
-        print(API.getCheerList(game_type: "soccer", game_num: "20", seq: 200, nation_code: "kr", user_key: "K1234").url ?? "")
-        print(API.testList("F1234", 1234).url ?? "")
-        
         let array = [0,1,2,3,4,5,6,7]
         
-        //return 생략 가능
+        //map
         let mapArray = array.map { (item: Int) -> String in
             "\(item*10)"
         }
         print(mapArray)
         
-        let mapArray2 = array.map {
-            return "\($0 * 10)"
-        }
-        
+        let mapArray2 = array.map { "\($0 * 10)" }
         print(mapArray2)
         
-        let mapArray3 = array.map { (item: Int) -> Bool in
-            item % 2 == 0
-        }
-        print(mapArray3)
-        
-        
+        //filter
         let filterArray = array.filter { (item: Int) -> Bool in
             item % 2 == 0
         }
+        print(filterArray)
         
         let filterArray2 = array.filter { $0 % 2 == 0 }
-        
-        print(filterArray)
         print(filterArray2)
-
-        //nil을 걸러낸다.
+        
+        //flatmap -> nil을 걸러낸다.
         let stringArray = ["good",
                            "http://google.com" ,
                            "http://agit.io" ,
@@ -227,30 +233,18 @@ class ViewController: UIViewController {
         let hosts = stringArray.flatMap { (string: String) -> String? in
             return URL(string: string)?.host
         }
+        print(hosts)
         
         let hosts2 = stringArray.flatMap { URL(string: $0)?.host }
-        
-        print(hosts)
         print(hosts2)
-
         
-        //[0-9] (다쪼갬), [0-9]+ (연속된숫자)
-        let rexArray = matches(for: "[0-9]", in: "ab2v9bc13j5jf4jv21")
+        let rexArray = matches(for: "[0-9]+", in: "ab2v9bc13j5jf4jv21")
+            .flatMap{ Int($0) }
+            .filter { (number: Int) -> Bool in return number % 2 != 0 }
+            .map{ $0 * $0 }
+            .reduce(0, +)
         print(rexArray)
         
-        collectionExample()
-        
-        
-        
-        print("3".times(3))
-        
-        let ar = Array(0..<3)
-        print(ar)
-        //        let position = Position(x: 10, y: 10)
-        //        let newPosition = position.transform(withOther: Position(x: 30, y: 30))
-        //        print(newPosition)
-        
-        //        print(API.getCheerList.url ?? "")
         
         //        rxCreate()
         //        rxSubject()
@@ -261,12 +255,23 @@ extension ViewController{
     
     func rxSubject(){
         
+        /*
+         보통의 앱개발에서 필요한 것은 실시간으로 Observable에 새로운 값을 수동으로 추가하고 subscriber에게 방출하는 것
+         다시 말하면, Observable이자 Observer인 녀석이 필요하다. 이 것을 Subject라고 부른다.
+         Subject = Observable + Observer (와 같이 행동한다)
+         Subject는 .next 이벤트를 받고, 이런 이벤트를 수신할 때마다 subscriber에 방출한다.
+         
+         RxSwift에는 4가지 타입의 subject가 있다.
+         PublishSubject: 빈 상태로 시작하여 새로운 값만을 subscriber에 방출한다.
+         BehaviorSubject: 하나의 초기값을 가진 상태로 시작하여, 새로운 subscriber에게 초기값 또는 최신값을 방출한다.
+         ReplaySubject: 버퍼를 두고 초기화하며, 버퍼 사이즈 만큼의 값들을 유지하면서 새로운 subscriber에게 방출한다.
+         Variable: BehaviorSubject를 래핑하고, 현재의 값을 상태로 보존한다. 가장 최신/초기 값만을 새로운 subscriber에게 방출한다. */
+        
         let publishSubject = PublishSubject<Int>()
         
         publishSubject.subscribe(subscribe).disposed(by: disposeBag)
         
         //이벤트 발행을 하기전까지는 아무일도 일어나지 않음
-        
         publishSubject.on(Event.next(1))
         publishSubject.on(Event.next(2))
         publishSubject.on(Event.next(3))
@@ -296,6 +301,10 @@ extension ViewController{
     }
     
     func rxCreate(){
+        
+        //        Observable은 어떤 구성요소를 가지는 next 이벤트를 계속해서 방출할 수 있다.
+        //        Observable은 error 이벤트를 방출하여 완전 종료될 수 있다.
+        //        Observable은 complete 이벤트를 방출하여 완전 종료 될 수 있다.
         
         // 1. obervable 생성 - just
         Observable<Int>.just(1).subscribe { (event: Event) in
@@ -328,12 +337,13 @@ extension ViewController{
         
         //6. observable 생성 - create
         Observable<Int>.create { (anyObserver: AnyObserver<Int>) -> Disposable in
-            anyObserver.on(Event.next(1))
+            anyObserver.onNext(1)
             anyObserver.on(Event.next(2))
             anyObserver.on(Event.next(3))
-            anyObserver.on(Event.next(4))
+            anyObserver.onNext(4)
             anyObserver.on(Event.next(5))
             anyObserver.on(Event.completed)
+            //            anyObserver.onCompleted()
             return Disposables.create {
                 print("dispose")
             }
@@ -350,17 +360,15 @@ extension ViewController{
     
     func collectionExample(){
         
-        
         /* question : 주어진 문자열에서 홀수인 숫자들의 제곱의 합을 출력한다.
          예) "ab2v9bc13j5jf4jv21" -> 9^2 + 13^2 + 5^2 + 21^2 = 716 */
+        // regpattern: [0-9] (다쪼갬), [0-9]+ (연속된숫자)
         
         let string = "ab2v9bc13j5jf4jv21"
         
         //1. 정규식 패턴으로 숫자만 걸러낸다.
         let numberArray = (try? NSRegularExpression(pattern: "[0-9]+")
             .matches(in: string, range: NSRange(string.startIndex..., in: string))
-            
-            //2. nil처리
             .flatMap { Range($0.range, in: string) }
             .map { String(string[$0]) }) ?? []
         
@@ -370,7 +378,7 @@ extension ViewController{
             }
             .filter { $0 % 2 != 0 }
             .map { $0 * $0 }
-            .reduce(0, +)
+            .reduce(0) { $0 + $1 }
         
         print(r)
     }
@@ -379,19 +387,19 @@ extension ViewController{
         
         do {
             let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: text,
-                                        range: NSRange(text.startIndex..., in: text))
-            return results.map {
-                String(text[Range($0.range, in: text)!])
+            let results = regex.matches(in: text, range: NSRange(text.startIndex..., in: text))
+            return results.flatMap { Range($0.range, in: text)
+                .map { String(text[$0]) }
             }
+            
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
             return []
         }
     }
     
-    //Type Constraints
-    func compare<T: Equatable>(value1: T, value2: T) -> Bool{
+    //MARK: - Type Constraints
+    func compare<T: Equatable & Comparable>(value1: T, value2: T) -> Bool{
         return value1 == value2
     }
 }
