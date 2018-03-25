@@ -9,6 +9,7 @@ target 'RxSwift_1' do
   pod 'Alamofire', '~> 4.6'
   pod 'RxCocoa', '~> 4.1'
   pod 'RxSwift', '~> 4.1'
+  pod 'RxDataSources'
 
   target 'RxSwift_1Tests' do
     inherit! :search_paths

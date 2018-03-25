@@ -11,33 +11,33 @@ import RxCocoa
 import RxSwift
 
 //MARK: - Enumerate Pattern + Extension
-enum API {
-    case getCheerList(game_type: String, game_num: String, seq: Int, nation_code: String, user_key: String)
-    case getMatotoList(user: String)
-    case testList(String, Int)
-}
+//enum API {
+//    case getCheerList(game_type: String, game_num: String, seq: Int, nation_code: String, user_key: String)
+//    case getMatotoList(user: String)
+//    case testList(String, Int)
+//}
 
-extension API {
-    
-    var host: String{
-        return "https://sccomment.wisetoto.com:442"
-    }
-    
-    var path: String {
-        switch self {
-        case let .getCheerList(game_type, game_num, seq, nation_code, user_key):
-            return "/app/query/cheer_global.php?ext=json&game_type=\(game_type)&game_num=\(game_num)&seq=\(seq)&nation_code=\(nation_code)&user_key=\(user_key)"
-        case let .getMatotoList(user):
-            return "/app/renew/get_matoto.php?ext=json&=user=\(user)"
-        case let .testList(user_key, seq):
-            return "/app/renew/testList.php?\(user_key)&\(seq)"
-        }
-    }
-    
-    var url: URL? {
-        return URL(string: "\(self.host)\(self.path)")
-    }
-}
+//extension API {
+//
+//    var host: String{
+//        return "https://sccomment.wisetoto.com:442"
+//    }
+//
+//    var path: String {
+//        switch self {
+//        case let .getCheerList(game_type, game_num, seq, nation_code, user_key):
+//            return "/app/query/cheer_global.php?ext=json&game_type=\(game_type)&game_num=\(game_num)&seq=\(seq)&nation_code=\(nation_code)&user_key=\(user_key)"
+//        case let .getMatotoList(user):
+//            return "/app/renew/get_matoto.php?ext=json&=user=\(user)"
+//        case let .testList(user_key, seq):
+//            return "/app/renew/testList.php?\(user_key)&\(seq)"
+//        }
+//    }
+//
+//    var url: URL? {
+//        return URL(string: "\(self.host)\(self.path)")
+//    }
+//}
 
 //MARK: - Struct Extension
 struct Position {
@@ -129,8 +129,8 @@ class ViewController: UIViewController {
         3.printSomeThing()
         "my".printSomeThing()
         
-        print(API.getCheerList(game_type: "soccer", game_num: "20", seq: 200, nation_code: "kr", user_key: "K1234").url ?? "")
-        print(API.testList("F1234", 1234).url ?? "")
+//        print(API.getCheerList(game_type: "soccer", game_num: "20", seq: 200, nation_code: "kr", user_key: "K1234").url ?? "")
+//        print(API.testList("F1234", 1234).url ?? "")
         
         let tree: BinaryTree = .node(
             left: .node(left:  .node(left: .leaf, right: .leaf, data: 1),

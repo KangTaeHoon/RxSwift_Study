@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		06127E16205CFF1F00B97E0E /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E15205CFF1F00B97E0E /* EventViewController.swift */; };
+		06127E1A20660DF400B97E0E /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E1920660DF400B97E0E /* AnimationViewController.swift */; };
+		06127E1C2067A82600B97E0E /* URLToImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E1B2067A82600B97E0E /* URLToImageViewController.swift */; };
+		06127E202067ACA700B97E0E /* GroupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E1F2067ACA700B97E0E /* GroupListViewController.swift */; };
+		06127E232067AE7900B97E0E /* UIImagePickerController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E212067AE7900B97E0E /* UIImagePickerController+Rx.swift */; };
+		06127E242067AE7900B97E0E /* ImagePickerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E222067AE7900B97E0E /* ImagePickerTestViewController.swift */; };
+		06127E272067AE8500B97E0E /* SelectedColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E252067AE8500B97E0E /* SelectedColorViewController.swift */; };
+		06127E282067AE8500B97E0E /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E262067AE8500B97E0E /* ColorViewController.swift */; };
 		0615433B2057FDAC00F68D30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0615433A2057FDAC00F68D30 /* AppDelegate.swift */; };
 		0615433D2057FDAC00F68D30 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0615433C2057FDAC00F68D30 /* ViewController.swift */; };
 		061543402057FDAC00F68D30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0615433E2057FDAC00F68D30 /* Main.storyboard */; };
@@ -39,6 +46,13 @@
 
 /* Begin PBXFileReference section */
 		06127E15205CFF1F00B97E0E /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		06127E1920660DF400B97E0E /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
+		06127E1B2067A82600B97E0E /* URLToImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLToImageViewController.swift; sourceTree = "<group>"; };
+		06127E1F2067ACA700B97E0E /* GroupListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListViewController.swift; sourceTree = "<group>"; };
+		06127E212067AE7900B97E0E /* UIImagePickerController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImagePickerController+Rx.swift"; sourceTree = "<group>"; };
+		06127E222067AE7900B97E0E /* ImagePickerTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerTestViewController.swift; sourceTree = "<group>"; };
+		06127E252067AE8500B97E0E /* SelectedColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedColorViewController.swift; sourceTree = "<group>"; };
+		06127E262067AE8500B97E0E /* ColorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		061543372057FDAC00F68D30 /* RxSwift_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSwift_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0615433A2057FDAC00F68D30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0615433C2057FDAC00F68D30 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +105,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06127E1D2067A82B00B97E0E /* Week_1 */ = {
+			isa = PBXGroup;
+			children = (
+				0615433C2057FDAC00F68D30 /* ViewController.swift */,
+				06127E15205CFF1F00B97E0E /* EventViewController.swift */,
+			);
+			path = Week_1;
+			sourceTree = "<group>";
+		};
+		06127E1E2067A83A00B97E0E /* Week_2 */ = {
+			isa = PBXGroup;
+			children = (
+				06127E1920660DF400B97E0E /* AnimationViewController.swift */,
+				06127E1B2067A82600B97E0E /* URLToImageViewController.swift */,
+				06127E1F2067ACA700B97E0E /* GroupListViewController.swift */,
+				06127E222067AE7900B97E0E /* ImagePickerTestViewController.swift */,
+				06127E212067AE7900B97E0E /* UIImagePickerController+Rx.swift */,
+				06127E262067AE8500B97E0E /* ColorViewController.swift */,
+				06127E252067AE8500B97E0E /* SelectedColorViewController.swift */,
+			);
+			path = Week_2;
+			sourceTree = "<group>";
+		};
 		0615432E2057FDAC00F68D30 = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				0615433A2057FDAC00F68D30 /* AppDelegate.swift */,
-				0615433C2057FDAC00F68D30 /* ViewController.swift */,
-				06127E15205CFF1F00B97E0E /* EventViewController.swift */,
+				06127E1D2067A82B00B97E0E /* Week_1 */,
+				06127E1E2067A83A00B97E0E /* Week_2 */,
 				0615433E2057FDAC00F68D30 /* Main.storyboard */,
 				061543412057FDAC00F68D30 /* Assets.xcassets */,
 				061543432057FDAC00F68D30 /* LaunchScreen.storyboard */,
@@ -381,13 +418,17 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RxSwift_1/Pods-RxSwift_1-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -465,9 +506,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06127E202067ACA700B97E0E /* GroupListViewController.swift in Sources */,
 				0615433D2057FDAC00F68D30 /* ViewController.swift in Sources */,
+				06127E232067AE7900B97E0E /* UIImagePickerController+Rx.swift in Sources */,
 				0615433B2057FDAC00F68D30 /* AppDelegate.swift in Sources */,
 				06127E16205CFF1F00B97E0E /* EventViewController.swift in Sources */,
+				06127E272067AE8500B97E0E /* SelectedColorViewController.swift in Sources */,
+				06127E1A20660DF400B97E0E /* AnimationViewController.swift in Sources */,
+				06127E242067AE7900B97E0E /* ImagePickerTestViewController.swift in Sources */,
+				06127E282067AE8500B97E0E /* ColorViewController.swift in Sources */,
+				06127E1C2067A82600B97E0E /* URLToImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
