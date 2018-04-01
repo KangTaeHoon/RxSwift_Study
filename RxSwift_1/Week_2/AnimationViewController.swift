@@ -64,8 +64,11 @@ class AnimationViewController: UIViewController {
 
 extension AnimationViewController {
     func bind() {
-        leftButton.rx.tap.map{ Animation.left }
-            .bind(to: box.rx.animation).disposed(by: disposBag)
+        
+        //버튼 입력을 Animation으로 변환해서 box에 bind
+        leftButton.rx.tap.map{ _ -> Animation in
+            return Animation.left
+            }.bind(to: box.rx.animation).disposed(by: disposBag)
         
         rightButton.rx.tap.map{ Animation.right }
             .bind(to: box.rx.animation).disposed(by: disposBag)

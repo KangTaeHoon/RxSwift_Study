@@ -28,6 +28,8 @@ extension GroupListViewController {
     
     //이해하지말고, 그냥 써볼것 (섹션을 놓고싶으면 이걸 무조건 써야한다.)
     func createDatasource() -> RxTableViewSectionedReloadDataSource<GroupSection> {
+        
+        //데이터 소스를 관리 해준다.
         return RxTableViewSectionedReloadDataSource<GroupSection>(configureCell: { (datasource, tableView, indexPath, group) -> UITableViewCell in
             let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
             cell.textLabel?.text = group.name
@@ -40,6 +42,7 @@ extension GroupListViewController {
     func bind() {
         
         //두 api의 값을 엮는다. //RxDatasource 사용
+        //combineLatest가 아니고, zip을 쓴 이유는 딱딱 2개만 필요하기때문, 더 기다렸다가 나중에 나오는 이벤트들을 쓰는게 아니기 때문. 부를때마다 하나씩 있으면 됨.
         let items: Observable<[GroupSection]> = Observable.zip(GroupListAPI.groupList(), GroupListAPI.categoryList()) { (groups: [Group], categories: [Category]) -> [GroupSection] in
             return categories.map { (category) -> GroupSection in
                 let groups = groups.filter { $0.categoryID == category.ID }

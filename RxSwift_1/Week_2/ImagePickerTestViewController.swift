@@ -100,6 +100,7 @@ struct API {
         let imageSize: Float = Float(data.count)
         return Observable<Float>.create({ (observer) -> Disposable in
             
+            //func stride<T>(from start: T, to end: T, by stride: T.Stride) -> StrideTo<T> where T : Strideable
             for i in stride(from: 0, to: imageSize, by: 40) {
                 observer.onNext( Float(i / imageSize) )
             }

@@ -27,7 +27,9 @@ extension SelectedColorViewController {
     func bind() {
         
         addButton.rx.tap.asObservable().flatMap { [weak self]  in
-            return ColorViewController.rx.create(parent: self).flatMap { $0.rx.selectedColor }.take(1)
+            return ColorViewController.rx.createToColor(parent: self)
+//                .flatMap { $0.rx.selectedColor }
+//                .take(1)
             }.subscribe(onNext: { [weak self] (color) in
                 guard let `self` = self else { return }
                 var datasource = self.datasource.value

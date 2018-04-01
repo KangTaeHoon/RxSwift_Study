@@ -156,6 +156,7 @@
 				0615433A2057FDAC00F68D30 /* AppDelegate.swift */,
 				06127E1D2067A82B00B97E0E /* Week_1 */,
 				06127E1E2067A83A00B97E0E /* Week_2 */,
+				0655BC82206F47FF00A17111 /* Week_3 */,
 				0615433E2057FDAC00F68D30 /* Main.storyboard */,
 				061543412057FDAC00F68D30 /* Assets.xcassets */,
 				061543432057FDAC00F68D30 /* LaunchScreen.storyboard */,
@@ -180,6 +181,13 @@
 				0615435C2057FDAD00F68D30 /* Info.plist */,
 			);
 			path = RxSwift_1UITests;
+			sourceTree = "<group>";
+		};
+		0655BC82206F47FF00A17111 /* Week_3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Week_3;
 			sourceTree = "<group>";
 		};
 		4101E1BDD907A28A08E9EBBE /* Pods */ = {

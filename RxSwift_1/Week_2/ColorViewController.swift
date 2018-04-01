@@ -94,10 +94,18 @@ extension ColorViewController {
 }
 // ColorViewcontroller.create(parent: self)  : Observable<ColorViewController>
 extension Reactive where Base: ColorViewController {
+    
+    static func createToColor(parent: UIViewController?, animated: Bool = true) -> Observable<UIColor>{
+        return self.create(parent: parent, animated: animated).flatMap{
+            $0.rx.selectedColor
+        }.take(1)
+    }
+    
     static func create(parent: UIViewController?, animated: Bool = true) -> Observable<ColorViewController> {
         return Observable<ColorViewController>.create({ (observer) -> Disposable in
             let colorViewController = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "ColorViewController") as! ColorViewController
             
+            //cancel버튼을 눌렀을때 디스미스를 하고 디스포저블을 전달해라
             let dismissDispoable = colorViewController.cancelButton.rx.tap.asObservable()
                 .subscribe(onNext: { [weak colorViewController] () in
                     guard let colorViewController = colorViewController else { return }
@@ -108,6 +116,8 @@ extension Reactive where Base: ColorViewController {
             parent?.present(naviController, animated: animated, completion: {
                 observer.onNext(colorViewController)
             })
+            
+            //둘중 하나가 디스포즈되어도 같이 디스포즈 되도록 만든다.
             return Disposables.create([dismissDispoable, Disposables.create {
                 colorViewController.dismiss(animated: animated, completion: nil)
                 }])
