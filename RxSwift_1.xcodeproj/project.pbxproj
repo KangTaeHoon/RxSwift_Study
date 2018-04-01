@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06104DD32071671A00DB3EFE /* SecondTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06104DD12071671A00DB3EFE /* SecondTableViewController.swift */; };
+		06104DD42071671A00DB3EFE /* FirstTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06104DD22071671A00DB3EFE /* FirstTableViewController.swift */; };
+		06104DD7207167F300DB3EFE /* ThirdTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06104DD5207167F300DB3EFE /* ThirdTableViewController.swift */; };
+		06104DD8207167F300DB3EFE /* FourthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06104DD6207167F300DB3EFE /* FourthTableViewController.swift */; };
+		06104DDA207168B800DB3EFE /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06104DD9207168B800DB3EFE /* TableViewController.swift */; };
 		06127E16205CFF1F00B97E0E /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E15205CFF1F00B97E0E /* EventViewController.swift */; };
 		06127E1A20660DF400B97E0E /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E1920660DF400B97E0E /* AnimationViewController.swift */; };
 		06127E1C2067A82600B97E0E /* URLToImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06127E1B2067A82600B97E0E /* URLToImageViewController.swift */; };
@@ -45,6 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06104DD12071671A00DB3EFE /* SecondTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondTableViewController.swift; sourceTree = "<group>"; };
+		06104DD22071671A00DB3EFE /* FirstTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTableViewController.swift; sourceTree = "<group>"; };
+		06104DD5207167F300DB3EFE /* ThirdTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdTableViewController.swift; sourceTree = "<group>"; };
+		06104DD6207167F300DB3EFE /* FourthTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthTableViewController.swift; sourceTree = "<group>"; };
+		06104DD9207168B800DB3EFE /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		06127E15205CFF1F00B97E0E /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		06127E1920660DF400B97E0E /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		06127E1B2067A82600B97E0E /* URLToImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLToImageViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +196,11 @@
 		0655BC82206F47FF00A17111 /* Week_3 */ = {
 			isa = PBXGroup;
 			children = (
+				06104DD22071671A00DB3EFE /* FirstTableViewController.swift */,
+				06104DD12071671A00DB3EFE /* SecondTableViewController.swift */,
+				06104DD5207167F300DB3EFE /* ThirdTableViewController.swift */,
+				06104DD6207167F300DB3EFE /* FourthTableViewController.swift */,
+				06104DD9207168B800DB3EFE /* TableViewController.swift */,
 			);
 			path = Week_3;
 			sourceTree = "<group>";
@@ -521,8 +536,13 @@
 				06127E16205CFF1F00B97E0E /* EventViewController.swift in Sources */,
 				06127E272067AE8500B97E0E /* SelectedColorViewController.swift in Sources */,
 				06127E1A20660DF400B97E0E /* AnimationViewController.swift in Sources */,
+				06104DD8207167F300DB3EFE /* FourthTableViewController.swift in Sources */,
+				06104DD7207167F300DB3EFE /* ThirdTableViewController.swift in Sources */,
 				06127E242067AE7900B97E0E /* ImagePickerTestViewController.swift in Sources */,
+				06104DD42071671A00DB3EFE /* FirstTableViewController.swift in Sources */,
 				06127E282067AE8500B97E0E /* ColorViewController.swift in Sources */,
+				06104DD32071671A00DB3EFE /* SecondTableViewController.swift in Sources */,
+				06104DDA207168B800DB3EFE /* TableViewController.swift in Sources */,
 				06127E1C2067A82600B97E0E /* URLToImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
