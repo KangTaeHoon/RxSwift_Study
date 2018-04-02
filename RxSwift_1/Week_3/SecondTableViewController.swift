@@ -22,7 +22,6 @@ class SecondTableViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     secondWay()
-    
   }
   
   

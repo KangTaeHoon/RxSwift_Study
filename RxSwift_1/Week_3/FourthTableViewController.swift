@@ -73,11 +73,7 @@ extension FourthTableViewController {
         mixButton.rx.tap.subscribe(onNext: { [weak self] _ in
             guard let `self` = self else {return}
             self.datasources.accept(self.secondNames)
-        }).disposed(by: disposeBag)
-        
-        
-        
-        
+        }).disposed(by: disposeBag)  
     }
 }
 

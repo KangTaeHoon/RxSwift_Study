@@ -19,9 +19,10 @@ class TableViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var disposeBag = DisposeBag()
-    var datasources: BehaviorRelay<[String]> = BehaviorRelay(value: ["오진성"])
+    var datasources: BehaviorRelay<[String]> = BehaviorRelay(value: ["오진성", "김창대", "강태훈", "강수민", "남덕호", "신정열", "윤진호", "이종은", "한진우", "장선혜", "은소영"])
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +40,29 @@ extension TableViewController: UIGestureRecognizerDelegate {
     }
     
     func bind() {
+        //과제
+        
+        let originSource = self.datasources.value
+        
+        searchBar.rx.text.orEmpty
+            .debounce(0.3, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (text) in
+                guard let `self` = self else { return }
+                if text.isEmpty {
+                    self.datasources.accept(originSource)
+                }else{
+                    let showNames = originSource.filter{ $0.contains(text) }
+                    self.datasources.accept(showNames)
+                }
+            }).disposed(by: disposeBag)
+        
+        
         addButton.rx.tap
             .flatMap { [weak self] _ -> Observable<String> in
+                
                 guard let `self` = self else { return Observable.empty() }
                 return self.textFieldAlert(title: "입력" , message: "추가할 이름을 입력하세요")
+                
             }.subscribe(onNext: { [weak self] name in
                 guard let `self` = self else { return }
                 var names = self.datasources.value
@@ -50,10 +70,8 @@ extension TableViewController: UIGestureRecognizerDelegate {
                 self.datasources.accept(names)
             }).disposed(by: disposeBag)
         
-        datasources.map {
-            [NameSectionModels(model: "", items: $0)]
-            }
-            .bind(to: tableView.rx.items(dataSource: createDatasources()))
+        datasources.map { [NameSectionModels(model: "", items: $0)]
+            }.bind(to: tableView.rx.items(dataSource: createDatasources()))
             .disposed(by: disposeBag)
         
         tableView.rx.itemSelected.asObservable(
@@ -83,13 +101,13 @@ extension TableViewController: UIGestureRecognizerDelegate {
         
         tableView.rx.itemMoved.asObservable().subscribe(onNext: { [weak self] (sourceIndexPath, destinationIndexPath) in
             guard let `self` = self else { return }
+            
             var names = self.datasources.value
-            
-            let source = names[sourceIndexPath.row]
-            names[sourceIndexPath.row] = names[destinationIndexPath.row]
-            names[destinationIndexPath.row] = source
-            
+            let currentName = self.datasources.value[sourceIndexPath.row]
+            names.remove(at: sourceIndexPath.row)
+            names.insert(currentName, at: destinationIndexPath.row)            
             self.datasources.accept(names)
+            
         }).disposed(by: disposeBag)
     }
     
@@ -127,6 +145,7 @@ extension TableViewController: UIGestureRecognizerDelegate {
     
     func textFieldAlert(title: String? , message: String?, indexPath: IndexPath, inputText: String) -> Observable<(IndexPath, String)> {
         return Observable<(IndexPath, String)>.create{ [weak self] (observer) -> Disposable in
+            
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addTextField(configurationHandler: { (textField) in
                 textField.text = inputText
